@@ -83,8 +83,8 @@ class Client {
       servico: serviceId,
       prioridade: priorityId,
       cliente: {
-        nome: customerId,
-        documento: customerName
+        nome: customerName,
+        documento: customerId
       }
     }
 
