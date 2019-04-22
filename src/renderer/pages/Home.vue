@@ -9,6 +9,45 @@
       </router-link>
     </div>
     <!--
+      Identification
+    -->
+    <article v-if="page=='identification'" :style="{'background-color': config.pageBgColor, 'color': config.pageFontColor}">
+      <header :style="{'background-color': config.headerBgColor}">
+        <h1 :style="{'color': config.headerFontColor, 'background-image': logoUrl}">
+          <span v-if="config.showTitle">{{'home.identification.title'|trans}}</span>&nbsp;
+        </h1>
+      </header>
+      <section>
+        <p v-if="config.showSubtitle">{{ 'home.identification.subtitle'|trans }}</p>
+        <div class="columns is-multiline is-mobile">
+          <div id="keyboard-container">
+            <div class="field">
+              <div class="control">
+                <input id="keyboard-input" class="input is-large" type="text" :placeholder="'home.identification.input'|trans">
+              </div>
+            </div>
+            <ul id="keyboard">
+              <li class="key-number" :style="buttonStyle(config)" @click="clickKeyboardNumber(1)">1</li>
+              <li class="key-number" :style="buttonStyle(config)" @click="clickKeyboardNumber(2)">2</li>
+              <li class="key-number lastitem" :style="buttonStyle(config)" @click="clickKeyboardNumber(3)">3</li>
+              <li class="key-number clearl" :style="buttonStyle(config)" @click="clickKeyboardNumber(4)">4</li>
+              <li class="key-number" :style="buttonStyle(config)" @click="clickKeyboardNumber(5)">5</li>
+              <li class="key-number lastitem" :style="buttonStyle(config)" @click="clickKeyboardNumber(6)">6</li>
+              <li class="key-number clearl" :style="buttonStyle(config)" @click="clickKeyboardNumber(7)">7</li>
+              <li class="key-number" :style="buttonStyle(config)" @click="clickKeyboardNumber(8)">8</li>
+              <li class="key-number lastitem" :style="buttonStyle(config)" @click="clickKeyboardNumber(9)">9</li>
+              <li class="key-delete clearl uppercase" @click="clickKeyboardDelete()">Borrar</li>
+              <li class="key-number" :style="buttonStyle(config)" @click="clickKeyboardNumber(0)">0</li>
+              <li class="key-accept lastitem uppercase key-disabled" @click="selectIdentification()">Aceptar</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <footer :style="{'background-color': config.footerBgColor, 'color': config.footerFontColor}">
+      </footer>
+    </article>
+
+    <!--
       Unity departments
     -->
     <article v-if="page=='departments'" :style="{'background-color': config.pageBgColor, 'color': config.pageFontColor}">
@@ -28,6 +67,16 @@
         </div>
       </section>
       <footer :style="{'background-color': config.footerBgColor, 'color': config.footerFontColor}">
+        <button v-if="config.showIdentificationPage" type="button" class="button is-large" @click="begin">
+          <span class="icon is-small">
+            <i class="fa fa-chevron-left"></i>
+          </span>
+          <span>{{ 'home.btn.back'|trans }}</span>
+        </button>
+
+        <span v-if="config.showIdentificationPage && timer" class="tag is-dark is-large is-pulled-right">
+          {{timer}}s
+        </span>
       </footer>
     </article>
 
@@ -84,6 +133,16 @@
         </div>
       </section>
       <footer :style="{'background-color': config.footerBgColor, 'color': config.footerFontColor}">
+        <button v-if="config.showIdentificationPage" type="button" class="button is-large" @click="begin">
+          <span class="icon is-small">
+            <i class="fa fa-chevron-left"></i>
+          </span>
+          <span>{{ 'home.btn.back'|trans }}</span>
+        </button>
+
+        <span v-if="config.showIdentificationPage && timer" class="tag is-dark is-large is-pulled-right">
+          {{timer}}s
+        </span>
       </footer>
     </article>
 
@@ -425,6 +484,17 @@
         }
       },
 
+      selectIdentification () {
+        var identification = document.getElementById('keyboard-input').value
+        if (identification.length === 7 || identification.length === 8) {
+          this.customer.id = identification
+          this.customer.name = ' '
+          this.page = this.secondPage
+        } else {
+          this.page = 'identification'
+        }
+      },
+
       selectDepartment (department) {
         this.page = 'department'
         this.department = department
@@ -523,6 +593,23 @@
         return classes.join(' ')
       },
 
+      clickKeyboardNumber (number) {
+        var input = document.getElementById('keyboard-input')
+        if (input.value.length < 8) {
+          input.value = input.value + number
+        }
+        if (input.value.length === 7 || input.value.length === 8) {
+          document.getElementsByClassName('key-accept')[0].classList.remove('key-disabled')
+        } else {
+          document.getElementsByClassName('key-accept')[0].classList.add('key-disabled')
+        }
+      },
+
+      clickKeyboardDelete () {
+        document.getElementsByClassName('key-accept')[0].classList.add('key-disabled')
+        document.getElementById('keyboard-input').value = ''
+      },
+
       unlockMenuListener (evt) {
         if (evt.keyCode === 81) {
           this.showMenu = true
@@ -588,15 +675,29 @@
             return
           }
 
-          if (this.enabledServices.length > 1) {
-            if (this.config.groupByDepartments && this.enabledDepartments.length > 0) {
-              this.firstPage = 'departments'
+          if (this.config.showIdentificationPage) {
+            this.firstPage = 'identification'
+            if (this.enabledServices.length > 1) {
+              if (this.config.groupByDepartments && this.enabledDepartments.length > 0) {
+                this.secondPage = 'departments'
+              } else {
+                this.secondPage = 'allServices'
+              }
             } else {
-              this.firstPage = 'allServices'
+              this.secondPage = 'service'
+              this.servicoUnidade = this.enabledServices[0].servicoUnidade
             }
           } else {
-            this.firstPage = 'service'
-            this.servicoUnidade = this.enabledServices[0].servicoUnidade
+            if (this.enabledServices.length > 1) {
+              if (this.config.groupByDepartments && this.enabledDepartments.length > 0) {
+                this.firstPage = 'departments'
+              } else {
+                this.firstPage = 'allServices'
+              }
+            } else {
+              this.firstPage = 'service'
+              this.servicoUnidade = this.enabledServices[0].servicoUnidade
+            }
           }
 
           this.begin()
@@ -714,4 +815,68 @@
       font-size: 1.5rem
       ul
         padding: 2rem 0
+
+    #keyboard-container
+      margin: 40px auto
+      width: 400px
+
+    #keyboard-input
+      text-align: center
+      font-size: 3rem
+
+    #keyboard
+      margin: 0
+      padding: 0
+      list-style: none
+      li
+        float: left
+        margin: 0 20px 20px 0
+        width: 120px
+        height: 120px
+        font-size: 60px
+        line-height: 120px
+        text-align: center
+        background: #fff
+        border: 1px solid #f9f9f9
+        border-radius: 5px
+
+    .clearl
+      clear: left
+
+    #keyboard
+      .key-delete, .key-accept
+        width: 120px
+        font-size: 24px
+
+      .lastitem
+        margin-right: 0
+
+      .uppercase
+        text-transform: uppercase
+
+      .on
+        display: none
+
+    #keyboard
+        .key-delete
+          color: rgb(255, 255, 255)
+          background-color: rgb(255, 0, 0)
+        .key-accept
+          color: rgb(255, 255, 255)
+          background-color: rgb(0, 166, 90)
+
+    #keyboard li:hover
+      position: relative
+      top: 1px
+      left: 1px
+      cursor: pointer
+
+    #keyboard
+        .key-disabled
+          background-color: rgb(236, 151, 31)
+          opacity: .25
+        .key-disabled:hover
+          top: 0px
+          left: 0px
+          cursor: not-allowed
 </style>

@@ -208,6 +208,14 @@
                   </label>
                 </div>
               </div>
+              <div class="field">
+                <div class="control">
+                  <label class="checkbox">
+                    <input type="checkbox" v-model="config.showIdentificationPage" :value="true">
+                    {{ 'settings.label.show_identification_page'|trans }}
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -622,6 +630,7 @@
     ctx.config.columns = ctx.config.columns || 2
     ctx.config.timer = ctx.config.timer || 10
     ctx.config.groupByDepartments = !!ctx.config.groupByDepartments
+    ctx.config.showIdentificationPage = !!ctx.config.showIdentificationPage
     ctx.config.services = ctx.config.services || []
     ctx.config.departments = ctx.config.departments || []
     ctx.config.pageBgColor = ctx.config.pageBgColor || '#FFFFFF'

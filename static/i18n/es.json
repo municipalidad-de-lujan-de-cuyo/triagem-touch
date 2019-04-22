@@ -21,6 +21,7 @@
   "settings.label.columns": "Columnas",
   "settings.label.timer": "Tiempo de espera",
   "settings.label.group_by_departments": "Agrupar por departamentos",
+  "settings.label.show_identification_page": "Mostrar página de identificación",
   "settings.label.page_bg_color": "Fondo de la página",
   "settings.label.page_font_color": "Fuente de la página",
   "settings.label.header_bg_color": "Fondo del encabezado",
@@ -51,11 +52,14 @@
   "home.btn.back": "Volver",
   "home.btn.normal": "Normal",
   "home.btn.priority": "Prioridad",
+  "home.identification.title": "Identificación",
+  "home.identification.subtitle": "Por favor ingrese su DNI",
+  "home.identification.input": "DNI",
   "home.departments.title": "Departamentos",
   "home.departments.subtitle": "Por favor seleccione departamento",
   "home.services.title": "Servicios",
   "home.services.subtitle": "Por favor seleccione servicio",
   "home.service.subtitle": "Tareas del servicio",
   "home.print.title": "Imprimiendo",
-  "home.print.subtitle": "Por favor espere mientras se imprimie el ticket"
+  "home.print.subtitle": "Por favor espere mientras se imprime el ticket"
 }
