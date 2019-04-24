@@ -626,24 +626,24 @@
   function load (ctx) {
     ctx.config = JSON.parse(JSON.stringify(ctx.$store.state.config))
     // defaults
-    ctx.config.locale = ctx.config.locale || 'en'
+    ctx.config.locale = ctx.config.locale || 'es'
     ctx.config.columns = ctx.config.columns || 2
-    ctx.config.timer = ctx.config.timer || 10
+    ctx.config.timer = ctx.config.timer || 15
     ctx.config.groupByDepartments = !!ctx.config.groupByDepartments
     ctx.config.showIdentificationPage = !!ctx.config.showIdentificationPage
     ctx.config.services = ctx.config.services || []
     ctx.config.departments = ctx.config.departments || []
-    ctx.config.pageBgColor = ctx.config.pageBgColor || '#FFFFFF'
+    ctx.config.pageBgColor = ctx.config.pageBgColor || '#F1F1F1'
     ctx.config.pageFontColor = ctx.config.pageFontColor || '#000000'
-    ctx.config.headerBgColor = ctx.config.headerBgColor || '#4FC08D'
-    ctx.config.headerFontColor = ctx.config.headerFontColor || '#FFFFFF'
+    ctx.config.headerBgColor = ctx.config.headerBgColor || '#4E4C4E'
+    ctx.config.headerFontColor = ctx.config.headerFontColor || '#FFD318'
     ctx.config.footerBgColor = ctx.config.footerBgColor || '#F1F1F1'
     ctx.config.footerFontColor = ctx.config.footerFontColor || '#FFFFFF'
-    ctx.config.buttonBgColor = ctx.config.buttonBgColor || '#00C4A7'
-    ctx.config.buttonFontColor = ctx.config.buttonFontColor || '#FFFFFF'
-    ctx.config.buttonNormalBgColor = ctx.config.buttonNormalBgColor || '#209CEE'
-    ctx.config.buttonNormalFontColor = ctx.config.buttonNormalFontColor || '#FFFFFF'
-    ctx.config.buttonPriorityBgColor = ctx.config.buttonPriorityBgColor || '#FF3860'
+    ctx.config.buttonBgColor = ctx.config.buttonBgColor || '#4E4C4E'
+    ctx.config.buttonFontColor = ctx.config.buttonFontColor || '#FFD318'
+    ctx.config.buttonNormalBgColor = ctx.config.buttonNormalBgColor || '#4E4C4E'
+    ctx.config.buttonNormalFontColor = ctx.config.buttonNormalFontColor || '#FFD318'
+    ctx.config.buttonPriorityBgColor = ctx.config.buttonPriorityBgColor || '#DD4B39'
     ctx.config.buttonPriorityFontColor = ctx.config.buttonPriorityFontColor || '#FFFFFF'
 
     if (ctx.config.scale === undefined) {

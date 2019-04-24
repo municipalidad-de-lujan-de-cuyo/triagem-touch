@@ -457,7 +457,7 @@
         return this.$store.state.config
       },
       logoUrl () {
-        const url = this.config.logo || '/static/images/logo.png'
+        const url = this.config.logo || '/static/images/logo-front.png'
         return `url(${url})`
       }
     },
@@ -860,7 +860,7 @@
     #keyboard
         .key-delete
           color: rgb(255, 255, 255)
-          background-color: rgb(255, 0, 0)
+          background-color: rgb(221, 75, 57)
         .key-accept
           color: rgb(255, 255, 255)
           background-color: rgb(0, 166, 90)
@@ -873,8 +873,7 @@
 
     #keyboard
         .key-disabled
-          background-color: rgb(236, 151, 31)
-          opacity: .25
+          opacity: .1
         .key-disabled:hover
           top: 0px
           left: 0px
