@@ -123,7 +123,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="column is-8" v-if="isDesktop">
+                <div class="column is-12" v-if="isDesktop">
                   <div class="field">
                     <label class="label">
                       {{ 'settings.label.printer'|trans }}
@@ -142,7 +142,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="column is-4">
+                <div class="column is-6">
                   <div class="field">
                     <label class="label">
                       {{ 'settings.label.timer'|trans }}
@@ -156,6 +156,28 @@
                           <option :value="20">20s</option>
                           <option :value="25">25s</option>
                           <option :value="30">30s</option>
+                        </select>
+                      </span>
+                      <span class="icon is-left">
+                        <i class="fa fa-clock-o"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="column is-6">
+                  <div class="field">
+                    <label class="label">
+                      {{ 'settings.label.timer_print'|trans }}
+                    </label>
+                    <div class="control is-expanded has-icons-left">
+                      <span class="select is-fullwidth">
+                        <select v-model="config.timerPrint">
+                          <option :value="1">1s</option>
+                          <option :value="2">2s</option>
+                          <option :value="3">3s</option>
+                          <option :value="5">5s</option>
+                          <option :value="10">10s</option>
+                          <option :value="15">15s</option>
                         </select>
                       </span>
                       <span class="icon is-left">
@@ -629,6 +651,7 @@
     ctx.config.locale = ctx.config.locale || 'es'
     ctx.config.columns = ctx.config.columns || 2
     ctx.config.timer = ctx.config.timer || 15
+    ctx.config.timerPrint = ctx.config.timerPrint || 3
     ctx.config.groupByDepartments = !!ctx.config.groupByDepartments
     ctx.config.showIdentificationPage = !!ctx.config.showIdentificationPage
     ctx.config.services = ctx.config.services || []

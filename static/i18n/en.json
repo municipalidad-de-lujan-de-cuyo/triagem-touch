@@ -20,6 +20,7 @@
   "settings.label.printer": "Printer",
   "settings.label.columns": "Columns",
   "settings.label.timer": "Wait time",
+  "settings.label.timer_print": "Wait time print",
   "settings.label.group_by_departments": "Group by departments",
   "settings.label.show_identification_page": "Show identification page",
   "settings.label.page_bg_color": "Fundo da página",

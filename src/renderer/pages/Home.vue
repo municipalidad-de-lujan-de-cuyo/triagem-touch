@@ -252,8 +252,8 @@
           <span>{{ 'home.btn.back'|trans }}</span>
         </button>
 
-        <span class="tag is-dark is-large is-pulled-right" v-if="timer">
-          {{timer}}s
+        <span class="tag is-dark is-large is-pulled-right" v-if="timerPrint">
+          {{timerPrint}}s
         </span>
       </footer>
     </article>
@@ -448,6 +448,7 @@
         },
         ticketInfo: null,
         timer: null,
+        timerPrint: null,
         startTime: null,
         showMenu: true
       }
@@ -468,6 +469,7 @@
         this.service = null
         this.ticketInfo = null
         this.timer = null
+        this.timerPrint = null
       },
 
       tick () {
@@ -479,6 +481,17 @@
           }
           if (this.timer <= 0) {
             this.timer = null
+            this.page = this.firstPage
+          }
+        }
+        if (this.page === 'printing') {
+          if (this.timerPrint === null) {
+            this.timerPrint = this.startTimePrint
+          } else {
+            this.timerPrint--
+          }
+          if (this.timerPrint <= 0) {
+            this.timerPrint = null
             this.page = this.firstPage
           }
         }
@@ -717,6 +730,7 @@
       document.addEventListener('keydown', this.unlockMenuListener)
 
       this.startTime = config.timer || 15
+      this.startTimePrint = config.timerPrint || 3
 
       if (!config || !config.server) {
         this.$router.push('/settings')
@@ -743,6 +757,7 @@
     watch: {
       page () {
         this.timer = null
+        this.timerPrint = null
       }
     }
   }

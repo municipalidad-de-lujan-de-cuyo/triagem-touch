@@ -20,6 +20,7 @@
   "settings.label.printer": "Impresora",
   "settings.label.columns": "Columnas",
   "settings.label.timer": "Tiempo de espera",
+  "settings.label.timer_print": "Tiempo de espera impresora",
   "settings.label.group_by_departments": "Agrupar por departamentos",
   "settings.label.show_identification_page": "Mostrar página de identificación",
   "settings.label.page_bg_color": "Fondo de la página",
