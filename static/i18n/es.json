@@ -51,6 +51,7 @@
   "settings.btn.save": "Guardar",
   "settings.services.empty": "Vacío",
   "home.btn.back": "Volver",
+  "home.btn.exit": "Salir",
   "home.btn.normal": "Normal",
   "home.btn.priority": "Prioridad",
   "home.identification.title": "Identificación",

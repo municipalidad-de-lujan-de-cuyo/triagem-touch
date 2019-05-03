@@ -71,7 +71,7 @@
           <span class="icon is-small">
             <i class="fa fa-chevron-left"></i>
           </span>
-          <span>{{ 'home.btn.back'|trans }}</span>
+          <span>{{ 'home.btn.exit'|trans }}</span>
         </button>
 
         <span v-if="config.showIdentificationPage && timer" class="tag is-dark is-large is-pulled-right">
@@ -137,7 +137,7 @@
           <span class="icon is-small">
             <i class="fa fa-chevron-left"></i>
           </span>
-          <span>{{ 'home.btn.back'|trans }}</span>
+          <span>{{ 'home.btn.exit'|trans }}</span>
         </button>
 
         <span v-if="config.showIdentificationPage && timer" class="tag is-dark is-large is-pulled-right">
@@ -464,7 +464,11 @@
     },
     methods: {
       begin () {
-        this.page = this.firstPage
+        if (this.page === 'service' || this.page === 'department' || this.page === 'priorities') {
+          this.page = this.secondPage
+        } else {
+          this.page = this.firstPage
+        }
         this.department = null
         this.service = null
         this.ticketInfo = null
@@ -481,7 +485,11 @@
           }
           if (this.timer <= 0) {
             this.timer = null
-            this.page = this.firstPage
+            if (this.page === 'service' || this.page === 'department' || this.page === 'priorities') {
+              this.page = this.secondPage
+            } else {
+              this.page = this.firstPage
+            }
           }
         }
         if (this.page === 'printing') {
@@ -704,11 +712,14 @@
             if (this.enabledServices.length > 1) {
               if (this.config.groupByDepartments && this.enabledDepartments.length > 0) {
                 this.firstPage = 'departments'
+                this.secondPage = 'departments'
               } else {
                 this.firstPage = 'allServices'
+                this.secondPage = 'allServices'
               }
             } else {
               this.firstPage = 'service'
+              this.secondPage = 'service'
               this.servicoUnidade = this.enabledServices[0].servicoUnidade
             }
           }
