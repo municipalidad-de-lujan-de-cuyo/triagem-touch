@@ -203,7 +203,7 @@
       <section>
         <div class="columns is-multiline is-mobile">
           <div class="column is-6" v-for="priority in priorities" :key="priority.id">
-            <button type="button" class="button is-danger is-xlarge is-block" :disabled="busy" @click="ticket(priority)">
+            <button type="button" class="button is-xlarge is-block" :style="{'color': config.buttonPriorityFontColor,'background-color': config.buttonPriorityBgColor}" :disabled="busy" @click="ticket(priority)">
               {{priority.nome}}
             </button>
           </div>
